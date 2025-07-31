@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Said Aidara | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a0a0a;
+            color: #f5f5f5;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #8e44ad, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s ease infinite;
+            background-size: 400% 400%;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glow-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .glow-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .glow-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .glow-button:hover::before {
+            left: 100%;
+        }
+        
+        .card-hover {
+            transition: all 0.3s;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #8e44ad, #3498db);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            margin: 15px auto;
+            background: linear-gradient(90deg, #8e44ad, #3498db);
+            border-radius: 2px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: -10px;
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+            border-radius: 50%;
+            top: 0;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        .skill-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: #333;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            position: absolute;
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #8e44ad, #3498db);
+            animation: fillBar 1.5s ease-out forwards;
+        }
+        
+        @keyframes fillBar {
+            from { width: 0; }
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black bg-opacity-90 backdrop-filter backdrop-blur-lg py-4 px-6 shadow-xl">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">AHMED SAID AIDARA</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-blue-400 transition">Accueil</a>
+                <a href="#about" class="nav-link text-white hover:text-blue-400 transition">À Propos</a>
+                <a href="#skills" class="nav-link text-white hover:text-blue-400 transition">Compétences</a>
+                <a href="#experience" class="nav-link text-white hover:text-blue-400 transition">Expérience</a>
+                <a href="#contact" class="nav-link text-white hover:text-blue-400 transition">Contact</a>
+            </div>
+            <button class="md:hidden text-white focus:outline-none" id="menu-toggle">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-black bg-opacity-90 w-full left-0 py-4 px-6" id="mobile-menu">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="nav-link text-white hover:text-blue-400 transition">Accueil</a>
+                <a href="#about" class="nav-link text-white hover:text-blue-400 transition">À Propos</a>
+                <a href="#skills" class="nav-link text-white hover:text-blue-400 transition">Compétences</a>
+                <a href="#experience" class="nav-link text-white hover:text-blue-400 transition">Expérience</a>
+                <a href="#contact" class="nav-link text-white hover:text-blue-400 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div class="absolute inset-0 bg-gradient-to-r from-black to-transparent z-10"></div>
+        <div class="absolute inset-0 bg-black opacity-60 z-0"></div>
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-0 left-0 w-full h-full opacity-20">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-500 to-green-500 opacity-30 animate-pulse" style="animation-duration: 8s;"></div>
+            </div>
+        </div>
+        
+        <div class="container mx-auto px-6 z-20 relative">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Bonjour, je suis <span class="gradient-text">Ahmed Said Aidara</span></h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8">Développeur & Créatif Sénégalais basé à Dakar</p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="glow-button bg-gradient-to-r from-purple-600 to-blue-500 text-white px-8 py-3 rounded-full font-semibold">Me Contacter</a>
+                        <a href="#about" class="border border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-8 py-3 rounded-full font-semibold transition">En savoir plus</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-blue-400 shadow-xl floating">
+                        <img src="photo1.png" alt="Ahmed Said Aidara" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-down">
+            <a href="#about" class="text-white text-2xl animate-bounce">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title">À <span class="gradient-text">Propos</span> de Moi</h2>
+            
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center">
+                    <div class="relative w-64 h-64 rounded-full overflow-hidden border-4 border-blue-400 shadow-xl">
+                        <img src="photo1.png" alt="Ahmed Said Aidara" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="md:w-2/3 md:pl-12">
+                    <h3 class="text-2xl font-bold mb-4 gradient-text">Qui suis-je ?</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Je m'appelle Ahmed Said Aidara, un professionnel passionné et créatif originaire du Sénégal. Basé à Dakar, je combine expertise technique et vision artistique pour créer des solutions innovantes et impactantes.
+                    </p>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Avec une approche unique et un engagement envers l'excellence, je m'efforce de repousser les limites de la création numérique tout en restant ancré dans lmes principes fondementales
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8">
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-md">
+                            <div class="text-blue-400 text-2xl mb-2">
+                                <i class="fas fa-globe-africa"></i>
+                            </div>
+                            <h4 class="font-bold">Sénégalais</h4>
+                            <p class="text-sm text-gray-400">Origine</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-md">
+                            <div class="text-blue-400 text-2xl mb-2">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h4 class="font-bold">Dakar</h4>
+                            <p class="text-sm text-gray-400">Localisation</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-md">
+                            <div class="text-blue-400 text-2xl mb-2">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="font-bold">Passionné</h4>
+                            <p class="text-sm text-gray-400">Approche</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title">Mes <span class="gradient-text">Compétences</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-8 gradient-text">Compétences Techniques</h3>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Développement Web</span>
+                            <span class="text-blue-400">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Design UI/UX</span>
+                            <span class="text-blue-400">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Mobile Development</span>
+                            <span class="text-blue-400">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Base de données</span>
+                            <span class="text-blue-400">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-8 gradient-text">Compétences Professionnelles</h3>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Communication</span>
+                            <span class="text-blue-400">92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Travail d'équipe</span>
+                            <span class="text-blue-400">94%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 94%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Gestion de projet</span>
+                            <span class="text-blue-400">87%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 87%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Résolution de problèmes</span>
+                            <span class="text-blue-400">96%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 96%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-gray-900 p-6 rounded-xl card-hover">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Développement</h4>
+                    <p class="text-gray-400">Solutions web et mobiles sur mesure</p>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl card-hover">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Design</h4>
+                    <p class="text-gray-400">Interfaces intuitives et esthétiques</p>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl card-hover">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Stratégie</h4>
+                    <p class="text-gray-400">Approche orientée résultats</p>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl card-hover">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Innovation</h4>
+                    <p class="text-gray-400">Solutions créatives et modernes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title">Mon <span class="gradient-text">Expérience</span></h2>
+            
+            <div class="relative">
+                <!-- Timeline -->
+                <div class="border-l-2 border-blue-400 border-opacity-50 ml-4 md:ml-32 pl-8 md:pl-16 space-y-16">
+                    <!-- Item 1 -->
+                    <div class="relative timeline-item">
+                        <div class="bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                            <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-briefcase text-white"></i>
+                            </div>
+                            <div class="flex flex-col md:flex-row justify-between">
+                                <h3 class="text-xl font-bold gradient-text mb-2">Développeur Senior</h3>
+                                <span class="text-blue-400 bg-blue-900 bg-opacity-50 px-3 py-1 rounded-full text-sm">2021 - Présent</span>
+                            </div>
+                            <h4 class="text-lg font-semibold text-blue-300 mb-3">Entreprise Innovante, Dakar</h4>
+                            <p class="text-gray-300">
+                                Direction d'une équipe de développement pour la création d'applications web et mobiles complexes. Mise en place de stratégies techniques et optimisation des performances.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2 -->
+                    <div class="relative timeline-item">
+                        <div class="bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                            <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-laptop-code text-white"></i>
+                            </div>
+                            <div class="flex flex-col md:flex-row justify-between">
+                                <h3 class="text-xl font-bold gradient-text mb-2">Développeur Full-Stack</h3>
+                                <span class="text-blue-400 bg-blue-900 bg-opacity-50 px-3 py-1 rounded-full text-sm">2018 - 2021</span>
+                            </div>
+                            <h4 class="text-lg font-semibold text-blue-300 mb-3">Agence Digitale, Dakar</h4>
+                            <p class="text-gray-300">
+                                Conception et développement d'applications web complètes. Collaboration avec des designers pour créer des interfaces utilisateur exceptionnelles.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 3 -->
+                    <div class="relative timeline-item">
+                        <div class="bg-gray-800 p-6 rounded-xl shadow-lg card-hover">
+                            <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-white"></i>
+                            </div>
+                            <div class="flex flex-col md:flex-row justify-between">
+                                <h3 class="text-xl font-bold gradient-text mb-2">Formation Avancée</h3>
+                                <span class="text-blue-400 bg-blue-900 bg-opacity-50 px-3 py-1 rounded-full text-sm">2016 - 2018</span>
+                            </div>
+                            <h4 class="text-lg font-semibold text-blue-300 mb-3">Université de Dakar</h4>
+                            <p class="text-gray-300">
+                                Spécialisation en développement web et technologies émergentes. Acquisition de compétences avancées en programmation et gestion de projet.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl card-hover">
+                    <div class="text-5xl font-bold gradient-text mb-4">50+</div>
+                    <h3 class="text-xl font-semibold mb-2">Projets Complétés</h3>
+                    <p class="text-gray-400">Solutions variées pour des clients locaux et internationaux</p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl card-hover">
+                    <div class="text-5xl font-bold gradient-text mb-4">30+</div>
+                    <h3 class="text-xl font-semibold mb-2">Clients Satisfaits</h3>
+                    <p class="text-gray-400">Relations professionnelles durables et fructueuses</p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl card-hover">
+                    <div class="text-5xl font-bold gradient-text mb-4">8+</div>
+                    <h3 class="text-xl font-semibold mb-2">Années d'Expérience</h3>
+                    <p class="text-gray-400">Expertise accumulée et perfectionnement continu</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title">Me <span class="gradient-text">Contacter</span></h2>
+            
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">Disponible pour des collaborations</h3>
+                    <p class="text-gray-300 mb-8 leading-relaxed">
+                        Que vous ayez un projet en tête ou que vous souhaitiez simplement discuter des possibilités, n'hésitez pas à me contacter. Je suis toujours ouvert à de nouvelles opportunités et collaborations intéressantes.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="text-blue-400 text-xl mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Localisation</h4>
+                                <p class="text-gray-400">Dakar, Sénégal</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-blue-400 text-xl mr-4 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Email</h4>
+                                <p class="text-gray-400">contact@ahmedsaid.sn</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-blue-400 text-xl mr-4 mt-1">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Téléphone</h4>
+                                <p class="text-gray-400">+221 77 123 45 67</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-blue-400 hover:bg-blue-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-blue-400 hover:bg-blue-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-blue-400 hover:bg-blue-400 hover:text-white transition">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-blue-400 hover:bg-blue-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-300 mb-2">Nom Complet</label>
+                                <input type="text" id="name" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Votre nom">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-300 mb-2">Email</label>
+                                <input type="email" id="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Votre email">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-gray-300 mb-2">Sujet</label>
+                            <input type="text" id="subject" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Sujet du message">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-300 mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Votre message"></textarea>
+                        </div>
+                        <button type="submit" class="glow-button bg-gradient-to-r from-purple-600 to-blue-500 text-white px-8 py-3 rounded-full font-semibold w-full md:w-auto">Envoyer Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-bold gradient-text">AHMED SAID AIDARA</a>
+                    <p class="text-gray-400 mt-2">Développeur & Créatif - Dakar, Sénégal</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#home" class="text-gray-400 hover:text-white transition">Accueil</a>
+                    <a href="#about" class="text-gray-400 hover:text-white transition">À Propos</a>
+                    <a href="#skills" class="text-gray-400 hover:text-white transition">Compétences</a>
+                    <a href="#experience" class="text-gray-400 hover:text-white transition">Expérience</a>
+                    <a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 Ahmed Said Aidara. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.skill-progress, .card-hover, .timeline-item');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.classList.add('animate');
+                }
+            });
+        };
+
+        // Run once on page load and then on scroll
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Add floating animation to elements
+        const floatingElements = document.querySelectorAll('.floating');
+        floatingElements.forEach((el, index) => {
+            el.style.animationDelay = `${index * 0.2}s`;
+        });
+    </script>
+</body>
+</html>
